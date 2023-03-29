@@ -1,17 +1,12 @@
 import {Module } from '@nestjs/common';
 import {SequelizeModule } from '@nestjs/sequelize';
 import {ConfigModule } from '@nestjs/config';
-
-
-import { UsersModule } from './users/users.module';
-import { User } from './users/users.model';
-import { RolesModule } from './roles/roles.module';
-import {Role} from "./roles/roles.model";
-import {UserRoles} from "./roles/user-roles.model";
-import { AuthModule } from './auth/auth.module';
+import { PurchaseController } from './purchase/purchase.controller';
+import { PurchaseModule } from './purchase/purchase.module';
+import {Purchases} from "./purchase/purchase.model";
 
 @Module({
-    controllers:[],
+    controllers:[PurchaseController],
     providers:[],
     imports: [
         ConfigModule.forRoot({
@@ -24,12 +19,10 @@ import { AuthModule } from './auth/auth.module';
             username: process.env.POSTGRESS_USER,
             password: process.env.POSTGRESS_PASSWORD,
             database: process.env.POSTGRESS_DB,
-            models: [User, Role, UserRoles],
+            models:[Purchases],
             autoLoadModels:true
         }),
-        UsersModule,
-        RolesModule,
-        AuthModule,
+        PurchaseModule
     ]
 })
 export class AppModule {

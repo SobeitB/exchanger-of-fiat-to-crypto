@@ -1,0 +1,2 @@
+
+export {succcessPurchase} from './submit'

@@ -6,10 +6,16 @@ import {AppModule} from './app.module'
 async function start() {
     const PORT = process.env.PORT || 3000;
 
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule,
+        {
+          cors: {
+              origin:'http://localhost:3000',
+              credentials: true,
+          }
+        });
 
     const config = new DocumentBuilder()
-        .setTitle('Урок по изучению бекенда')
+        .setTitle('Обменик через selenium')
         .setDescription('Документация рест апи')
         .setVersion('1.0.0')
         .build();
